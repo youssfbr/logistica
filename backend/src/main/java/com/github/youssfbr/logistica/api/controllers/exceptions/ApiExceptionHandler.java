@@ -21,6 +21,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.github.youssfbr.logistica.domain.services.exceptions.DatabaseException;
+import com.github.youssfbr.logistica.domain.services.exceptions.EmailException;
 import com.github.youssfbr.logistica.domain.services.exceptions.ResourceNotFoundException;
 
 import lombok.AllArgsConstructor;
@@ -78,6 +79,21 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		err.setTimestamp(Instant.now());
 		err.setStatus(status.value());
 		err.setError("Banco de Dados - Exceção!");
+		err.setMessage(e.getMessage());
+		err.setPath(request.getRequestURI());
+		
+		return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(EmailException.class)
+	public ResponseEntity<Object> handleEmail(EmailException e, HttpServletRequest request) {
+		
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		
+		StandardError err = new StandardError();
+		err.setTimestamp(Instant.now());
+		err.setStatus(status.value());
+		err.setError("Não foi possível cadastrar.");
 		err.setMessage(e.getMessage());
 		err.setPath(request.getRequestURI());
 		
