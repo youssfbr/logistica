@@ -3,7 +3,6 @@ package com.github.youssfbr.logistica.domain.services;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
-import javax.validation.Valid;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -40,7 +39,7 @@ public class ClienteService {
 	}
 	
 	@Transactional
-	public Cliente update(@Valid Long id, Cliente cliente) {
+	public Cliente update(Long id, Cliente cliente) {
 		try {
 			Cliente entity = repository.getOne(id);
 			entity.setNome(cliente.getNome());
@@ -66,12 +65,5 @@ public class ClienteService {
 			throw new DatabaseException("Um recurso está associado a outro recurso! Não é possível deletar!");
 		}		
 	}
-
-	
-
-	
-
-
-
 	
 }
