@@ -1,4 +1,4 @@
-package com.github.youssfbr.logistica.domain.model;
+package com.github.youssfbr.logistica.domain.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

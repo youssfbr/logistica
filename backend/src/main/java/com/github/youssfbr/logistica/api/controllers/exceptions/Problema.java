@@ -1,4 +1,4 @@
-package com.github.youssfbr.logistica.api.controller.exceptions;
+package com.github.youssfbr.logistica.api.controllers.exceptions;
 
 import java.time.LocalDateTime;
 import java.util.List;

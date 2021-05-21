@@ -1,4 +1,4 @@
-package com.github.youssfbr.logistica.api.controller.exceptions;
+package com.github.youssfbr.logistica.api.controllers.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
