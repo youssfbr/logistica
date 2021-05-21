@@ -3,6 +3,8 @@ package com.github.youssfbr.logistica.api.controller;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +41,7 @@ public class ClienteController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Cliente> insert(@RequestBody Cliente entity) {
+	public ResponseEntity<Cliente> insert(@Valid @RequestBody Cliente entity) {
 		entity = repository.save(entity);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -49,7 +51,7 @@ public class ClienteController {
 	}
 	
 	@PutMapping("{id}")
-	public ResponseEntity<Cliente> update(@PathVariable Long id, @RequestBody Cliente entity) {
+	public ResponseEntity<Cliente> update(@Valid @PathVariable Long id, @RequestBody Cliente entity) {
 		
 		if (!repository.existsById(id)) {
 			return ResponseEntity.notFound().build();
