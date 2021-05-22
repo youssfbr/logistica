@@ -1,6 +1,6 @@
 package com.github.youssfbr.logistica.domain.services;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
@@ -44,7 +44,7 @@ public class EntregaService {
 			
 			entrega.setCliente(cliente);
 			entrega.setStatus(StatusEntrega.PENDENTE);
-			entrega.setDataPedido(LocalDateTime.now());
+			entrega.setDataPedido(OffsetDateTime.now());
 			
 			return repository.save(entrega);
 	}
