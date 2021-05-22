@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.github.youssfbr.logistica.api.dto.EntregaDTO;
 import com.github.youssfbr.logistica.domain.models.Entrega;
 import com.github.youssfbr.logistica.domain.services.EntregaService;
 
@@ -29,12 +30,12 @@ public class EntregaController {
 	private final EntregaService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Entrega>> findAll() {
+	public ResponseEntity<List<EntregaDTO>> findAll() {
 		return ResponseEntity.ok(service.findAll());
 	}	
 	
 	@GetMapping("{id}")
-	public ResponseEntity<Entrega> findByID(@PathVariable Long id) {		 
+	public ResponseEntity<EntregaDTO> findByID(@PathVariable Long id) {		 
 		 return ResponseEntity.ok(service.findById(id));
 	}
 	

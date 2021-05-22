@@ -2,6 +2,7 @@ package com.github.youssfbr.logistica.domain.services;
 
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -10,6 +11,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.youssfbr.logistica.api.dto.EntregaDTO;
 import com.github.youssfbr.logistica.domain.models.Cliente;
 import com.github.youssfbr.logistica.domain.models.Entrega;
 import com.github.youssfbr.logistica.domain.models.enums.StatusEntrega;
@@ -27,14 +29,19 @@ public class EntregaService {
 	private final ClienteService clienteService;
 	
 	@Transactional(readOnly = true)
-	public List<Entrega> findAll() {	
-		return repository.findAll();
+	public List<EntregaDTO> findAll() {
+		
+		List<Entrega> list = repository.findAll();
+		
+		return list.stream().map(x -> new EntregaDTO(x)).collect(Collectors.toList());
 	}
 	
 	@Transactional(readOnly = true)
-	public Entrega findById(Long id) {		
-		return repository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Id " + id + " não encontrado!"));		
+	public EntregaDTO findById(Long id) {		
+		 Entrega entity = repository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Id " + id + " não encontrado!"));
+		 		 
+		 return new EntregaDTO(entity); 
 	}
 	
 	@Transactional
