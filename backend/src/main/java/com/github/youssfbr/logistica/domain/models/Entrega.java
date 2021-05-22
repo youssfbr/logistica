@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.github.youssfbr.logistica.domain.models.enums.StatusEntrega;
 
 import lombok.EqualsAndHashCode;
@@ -35,13 +37,17 @@ public class Entrega {
 	private Cliente cliente;
 	
 	@Embedded
-	private Destinatario destinario;
+	private Destinatario destinatario;
 	
 	private BigDecimal taxa;
 	
+	@JsonProperty(access = Access.READ_ONLY)
 	@Enumerated(EnumType.STRING)
 	private StatusEntrega status;
 	
+	@JsonProperty(access = Access.READ_ONLY)
 	private LocalDateTime dataPedido;
-	private LocalDateTime dataFinalização;
+	
+	@JsonProperty(access = Access.READ_ONLY)
+	private LocalDateTime dataFinalizacao;
 }

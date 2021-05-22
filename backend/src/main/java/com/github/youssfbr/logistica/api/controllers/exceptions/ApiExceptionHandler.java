@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.github.youssfbr.logistica.domain.services.exceptions.ClienteNaoEncontradoException;
 import com.github.youssfbr.logistica.domain.services.exceptions.DatabaseException;
 import com.github.youssfbr.logistica.domain.services.exceptions.EmailException;
 import com.github.youssfbr.logistica.domain.services.exceptions.ResourceNotFoundException;
@@ -87,6 +88,21 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	@ExceptionHandler(EmailException.class)
 	public ResponseEntity<Object> handleEmail(EmailException e, HttpServletRequest request) {
+		
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		
+		StandardError err = new StandardError();
+		err.setTimestamp(Instant.now());
+		err.setStatus(status.value());
+		err.setError("Não foi possível cadastrar.");
+		err.setMessage(e.getMessage());
+		err.setPath(request.getRequestURI());
+		
+		return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(ClienteNaoEncontradoException.class)
+	public ResponseEntity<Object> handleEmail(ClienteNaoEncontradoException e, HttpServletRequest request) {
 		
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		

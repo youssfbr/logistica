@@ -1,0 +1,1 @@
+ALTER TABLE tb_entrega DROP COLUMN telefone;
